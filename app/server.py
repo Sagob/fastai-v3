@@ -72,7 +72,7 @@ async def analyze(request):
         labels.append(x)
         confidence.append(p)
 
-    return JSONResponse({'result': str(labels[0]):'confidence': str(confidence[0])})
+    return JSONResponse({'result': str(labels[0]),'confidence': str(confidence[0]),'result2': str(labels[1]),'confidence': str(confidence[1])})
 
 
 if __name__ == '__main__':

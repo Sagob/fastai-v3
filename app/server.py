@@ -61,7 +61,18 @@ async def analyze(request):
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
     prediction = learn.predict(img)[0]
-    return JSONResponse({'result': str(prediction)})
+    classes=learn.data.classes
+    preds_s = prediction.argsort(descending=True)
+    preds_s=preds_s[:3] 
+    labels = []
+    confidence=[]
+    for i in preds_s:
+        x=classes[i]
+        p=preds[i]
+        labels.append(x)
+        confidence.append(p)
+
+    return JSONResponse({'result': str(labels[0]):'confidence': str(confidence[0])})
 
 
 if __name__ == '__main__':
